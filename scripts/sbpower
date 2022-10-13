@@ -1,0 +1,23 @@
+#!/bin/sh
+
+echo " "
+
+DMENU_THEME=''
+FONT="FiraCode Nerd Font:size=10"
+DARKBLUE="#101a20"
+NEONGREEN="#00ffc8"
+
+run_dmenu() {
+	dmenu -fn "$FONT" -nb "$DARKBLUE" -nf "$NEONGREEN" -sb "$NEONGREEN" -sf "$DARKBLUE"
+}
+
+if [ "$BUTTON" = "1" ]; then
+	choice="$(echo "Quit\nPower Off\nReboot" | run_dmenu)"
+
+	echo "CHOICE: $choice"
+	case "$choice" in
+		"Quit") pkill -9 dwm;;
+		"Power Off") st -c "wmprompt" -f "$FONT" -- sudo poweroff;;
+		"Reboot") st -c "wmprompt" -f "$FONT" -- sudo reboot;;
+	esac
+fi

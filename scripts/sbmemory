@@ -1,0 +1,6 @@
+#!/bin/sh
+
+mem="$(free -h | grep -E '^Mem:.*')"
+total="$(echo $mem | cut -d " " -f 2)"
+used="$(echo $mem | cut -d " " -f 3)"
+echo " $used/$total"
